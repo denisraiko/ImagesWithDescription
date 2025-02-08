@@ -21,9 +21,21 @@ class ImageDataManager {
     }
     
     func getNextImage() -> ImageModel {
-        if !images.isEmpty {
-            currentIndex = (currentIndex + 1) % images.count
+        if currentIndex < images.count - 1 {
+            currentIndex += 1
         }
+        return getCurrentIndex()
+    }
+
+    func getLastImage() -> ImageModel {
+        if currentIndex > 0 {
+            currentIndex -= 1
+        }
+        return getCurrentIndex()
+    }
+
+    func getFirstImage() -> ImageModel {
+        currentIndex = 0
         return getCurrentIndex()
     }
 }
