@@ -15,6 +15,7 @@ class ImageView: UIView {
         super.init(frame: .zero)
         setupImageView(imageName: imageName)
         imageView.addShadowView()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -34,7 +35,7 @@ class ImageView: UIView {
     }
     
     private func setupLayout() {
-        imageView.translatesAutoresizingMaskIntoConstraints = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
@@ -43,6 +44,4 @@ class ImageView: UIView {
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
-    
-    
 }
