@@ -6,6 +6,8 @@
 //
 
 import Foundation
+
+
 class ImageManager {
     func getImages() -> [ImageModel] {
         return [
