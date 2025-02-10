@@ -7,7 +7,14 @@
 
 import Foundation
 
-class ImageDataManager {
+protocol ImageManageable {
+    func getCurrentIndex() -> ImageModel
+    func getNextImage() -> ImageModel
+    func getLastImage() -> ImageModel
+    func getFirstImage() -> ImageModel
+}
+
+class ImageDataManager: ImageManageable {
     private var images: [ImageModel] = []
     private var currentIndex = 0
     
