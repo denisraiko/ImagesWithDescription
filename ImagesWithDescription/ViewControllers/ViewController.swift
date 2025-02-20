@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     private let imageManager = ImageManager()
     private let imageDataManager: ImageDataManager
     
+    
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.imageDataManager = ImageDataManager(images: imageManager.getImages())
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -34,6 +36,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nextButton.delegate = self
         
         view.backgroundColor = .white
         setupDescriptionLabel()
@@ -45,6 +48,14 @@ class ViewController: UIViewController {
 
         setupLayout()
         addAction()
+        
+        lastButton.nameInstance = "Last button"
+        nextButton.nameInstance = "Next button"
+        firstButton.nameInstance = "First button"
+        
+        print(view.countOfButton(firstButton, nextButton, lastButton))
+        view.nameOfButton(firstButton, nextButton , lastButton)
+        
     }
     
     private func setupDescriptionLabel() {
@@ -122,11 +133,11 @@ class ViewController: UIViewController {
         }
         lastButton.addAction(actionForLastButton, for: .touchUpInside)
         
-        let actionForNextButton = UIAction { _ in
-            let imageModel = self.imageDataManager.getNextImage()
-            self.updateUI(with: imageModel)
-        }
-        nextButton.addAction(actionForNextButton, for: .touchUpInside)
+//        let actionForNextButton = UIAction { _ in
+//            let imageModel = self.imageDataManager.getNextImage()
+//            self.updateUI(with: imageModel)
+//        }
+//        nextButton.addAction(actionForNextButton, for: .touchUpInside)
         
         let actionForFirstButton = UIAction { _ in
             let imageModel = self.imageDataManager.getFirstImage()
@@ -136,3 +147,11 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: IButtonDelegate {
+    func pressedButton() {
+        let imageModel = imageDataManager.getNextImage()
+        self.updateUI(with: imageModel)
+    }
+    
+    
+}
