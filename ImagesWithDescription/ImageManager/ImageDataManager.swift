@@ -15,6 +15,9 @@ protocol ImageManageable {
 }
 
 class ImageDataManager: ImageManageable {
+    
+    
+    
     private var images: [ImageModel] = []
     private var currentIndex = 0
     
@@ -44,5 +47,13 @@ class ImageDataManager: ImageManageable {
     func getFirstImage() -> ImageModel {
         currentIndex = 0
         return getCurrentIndex()
+    }
+    func getImage(_ name: String) -> ImageModel? {
+        for image in images {
+            if image.imageName == name {
+                return image
+            }
+        }
+        return nil
     }
 }

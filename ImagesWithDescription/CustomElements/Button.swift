@@ -8,8 +8,14 @@
 import Foundation
 import UIKit
 
+protocol IButtonDelegate: AnyObject {
+    func pressedButton()
+}
+
 class Button: UIButton {
     var isShadow = true
+    weak var delegate: IButtonDelegate?
+    var nameInstance: String?
     
     init(title: String, color: UIColor, titleColor: UIColor, isShadow: Bool) {
         super.init(frame: .zero)
@@ -17,6 +23,7 @@ class Button: UIButton {
         if isShadow {
             addShadowButton()
         }
+        addAction()
     }
     
     required init?(coder: NSCoder) {
@@ -31,6 +38,13 @@ class Button: UIButton {
         heightAnchor.constraint(equalToConstant: 40).isActive = true
         widthAnchor.constraint(equalToConstant: 70).isActive = true
     }
-    
-    
+}
+
+extension Button {
+    private func addAction() {
+        let action = UIAction { [weak self] _ in
+            self?.delegate?.pressedButton()
+        }
+        addAction(action, for: .touchUpInside)
+    }
 }
